@@ -26,13 +26,10 @@ public class OLSClientTest {
     private static final Logger logger = LoggerFactory.getLogger(OLSClientTest.class);
 
     @Test
-    @Ignore
-    //Ignoring as test uses ontology label that may change and break the test
     public void testGetTermById() throws Exception {
         Term term = olsClient.getTermById(new Identifier("MS:1001767", Identifier.IdentifierType.OBO), "MS");
-        Assert.assertTrue(term.getLabel().equalsIgnoreCase("nanoACQUITY UPLC System with 1D Technology"));
+        Assert.assertTrue(term.getTermOBOId().getIdentifier().equalsIgnoreCase("MS:1001767"));
     }
-
 
     @Test
     public void testGetOntologyNames() throws Exception {
@@ -42,10 +39,8 @@ public class OLSClientTest {
     }
 
     @Test
-    @Ignore
-    //Ignoring as test takes a long time to complete
     public void testGetAllTermsFromOntology() throws Exception {
-        List<Term> terms = olsClient.getAllTermsFromOntology("ms");
+        List<Term> terms = olsClient.getAllTermsFromOntology("pride");
         logger.info(terms.toString());
         Assert.assertTrue(terms.size() > 0);
     }
@@ -330,5 +325,12 @@ public class OLSClientTest {
         id = "EFO_0000891";
         term = olsClient.getReplacedBy(id);
         assertEquals("http://purl.obolibrary.org/obo/UBERON_0000010", term.getIri().getIdentifier());
+    }
+
+    @Test
+    public void testGetTermByIriId() throws Exception {
+        Term term = olsClient.getTermById(new Identifier("GO:0031145", Identifier.IdentifierType.OBO), "GO");
+        term = olsClient.getTermByIRIId(term.getIri().getIdentifier(), term.getOntologyPrefix());
+        Assert.assertTrue(term.getTermOBOId().getIdentifier().equalsIgnoreCase("GO:0031145"));
     }
 }
