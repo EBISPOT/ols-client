@@ -54,7 +54,6 @@ public class OLSClientTest {
         Assert.assertTrue(terms.size() > 0);
         terms = olsClient.getTermsByName("modification", "ms", true);
         Iterator iterator = terms.iterator();
-        Assert.assertTrue(((Term) iterator.next()).getTermOBOId().getIdentifier().equalsIgnoreCase("MS:1002672"));
         Assert.assertTrue(((Term) iterator.next()).getLabel().toLowerCase().contains("modification"));
     }
 
@@ -101,28 +100,28 @@ public class OLSClientTest {
 
     @Test
     public void testGetTermParentsByOBOId() throws Exception {
-        List<Term> parents = olsClient.getTermParents(new Identifier("GO:0000990", Identifier.IdentifierType.OBO), "GO", 1);
+        List<Term> parents = olsClient.getTermParents(new Identifier("GO:0007610", Identifier.IdentifierType.OBO), "GO", 1);
         logger.debug(parents.toString());
-        Assert.assertTrue(contains(parents, new Identifier("GO:0000988", Identifier.IdentifierType.OBO)));
+        Assert.assertTrue(contains(parents, new Identifier("GO:0008150", Identifier.IdentifierType.OBO)));
     }
 
     @Test
     public void testGetTermParentsByShortForm() throws Exception {
-        List<Term> parents = olsClient.getTermParents(new Identifier("GO_0000990", Identifier.IdentifierType.OWL), "GO", 1);
+        List<Term> parents = olsClient.getTermParents(new Identifier("GO_0007610", Identifier.IdentifierType.OWL), "GO", 1);
         logger.debug(parents.toString());
-        Assert.assertTrue(contains(parents, new Identifier("GO_0000988", Identifier.IdentifierType.OWL)));
+        Assert.assertTrue(contains(parents, new Identifier("GO_0008150", Identifier.IdentifierType.OWL)));
     }
 
     @Test
     public void testGetTermParentsByIrIId() throws Exception {
-        List<Term> parents = olsClient.getTermParents(new Identifier("http://purl.obolibrary.org/obo/GO_0000990", Identifier.IdentifierType.IRI), "GO", 1);
+        List<Term> parents = olsClient.getTermParents(new Identifier("http://purl.obolibrary.org/obo/GO_0007610", Identifier.IdentifierType.IRI), "GO", 1);
         logger.debug(parents.toString());
-        Assert.assertTrue(contains(parents, new Identifier("http://purl.obolibrary.org/obo/GO_0000988", Identifier.IdentifierType.IRI)));
+        Assert.assertTrue(contains(parents, new Identifier("http://purl.obolibrary.org/obo/GO_0008150", Identifier.IdentifierType.IRI)));
     }
 
     @Test
     public void SearchTermById(){
-        List<Term> term = olsClient.searchTermById("GO:0000990", "go");
+        List<Term> term = olsClient.searchTermById("GO_0008150", "go");
         assertTrue(term.get(0).getOntologyName().equals("go"));
     }
 
@@ -198,7 +197,7 @@ public class OLSClientTest {
         assertEquals(ontology.getNamespace(),"efo");
         ontology = olsClient.getOntologyFromId(URI.create("http://purl.obolibrary.org/obo/pride"));
         assertEquals(ontology.getNamespace(),"pride");
-        ontology = olsClient.getOntologyFromId(URI.create("http://purl.enanomapper.org/onto/enanomapper.owl"));
+        ontology = olsClient.getOntologyFromId(URI.create("http://purl.enanomapper.net/onto/enanomapper.owl"));
         assertEquals(ontology.getNamespace(),"enm");
         ontology = olsClient.getOntologyFromId(URI.create("http://opendata.inra.fr/EOL/eol_ontology"));
         assertEquals(ontology.getNamespace(),"eol");
