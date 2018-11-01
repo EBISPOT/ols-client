@@ -60,6 +60,17 @@
             </roles>
             <timezone>0</timezone>
         </developer>
+        <developer>
+            <id>simonjupp</id>
+            <name>Simon Jupp</name>
+            <email>jupp@ebi.ac.uk</email>
+            <organization>EBI</organization>
+            <organizationUrl>http://www.ebi.ac.uk</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>0</timezone>
+        </developer>
     </developers>
 
     <properties>
@@ -180,11 +191,39 @@
         </plugins>
     </build>
 
+    <!-- Version control (GitHub repository) -->
     <scm>
-        <connection>scm:git:https://github.com/PRIDE-Utilities/ols-client.git</connection>
-        <developerConnection>scm:git:https://github.com/PRIDE-Utilities/ols-client.git</developerConnection>
-        <url>https://github.com/PRIDE-Utilities/ols-client.git</url>
-        <tag>HEAD</tag>
+        <connection>scm:git:git@github.com:EBISPOT/ols-client</connection>
+        <developerConnection>scm:git:git@github.com:EBISPOT/ols-client.git</developerConnection>
+        <url>http://github.com/EBISPOT/ols-client</url>
+      <tag>HEAD</tag>
     </scm>
+
+    <distributionManagement>
+   		<repository>
+   			<id>nexus-release</id>
+   			<name>Releases</name>
+   			<url>https://www.ebi.ac.uk/spot/nexus/repository/maven-releases/</url>
+   		</repository>
+   		<snapshotRepository>
+   			<id>nexus-snapshot</id>
+   			<name>Snapshot</name>
+   			<url>https://www.ebi.ac.uk/spot/nexus/repository/maven-snapshots/</url>
+   		</snapshotRepository>
+   	</distributionManagement>
+
+    <repositories>
+   	    <repository>
+   	        <id>nexus-public</id>
+   	        <name>Public Repository</name>
+   	        <url>https://www.ebi.ac.uk/spot/nexus/repository/maven-public/</url>
+   	        <releases>
+   	            <enabled>true</enabled>
+   	        </releases>
+   	        <snapshots>
+   	            <enabled>true</enabled>
+   	        </snapshots>
+   	    </repository>
+   	</repositories>
 
 </project>
